@@ -3,24 +3,11 @@ export const dynamic = 'force-dynamic';
 import Header from './components/Header';
 import TournamentCard from './components/TournamentCard';
 import { getTournaments } from '@/data/getTournaments';
+import { groupTournamentsByMonth } from '@/services/tournaments.service';
 
 export default async function Home() {
   const tournaments = await getTournaments();
-  const groupedByMonth = tournaments?.reduce((acc: any, event) => {
-    const date = new Date(event.start_date);
-
-    const monthYear = date.toLocaleString('pt-BR', {
-      month: 'long',
-    });
-
-    if (!acc[monthYear]) {
-      acc[monthYear] = [];
-    }
-
-    acc[monthYear].push(event);
-
-    return acc;
-  }, {});
+  const groupedByMonth = groupTournamentsByMonth(tournaments);
 
   return (
     <>
@@ -44,11 +31,11 @@ export default async function Home() {
                     key={event.id}
                     title={event.title}
                     level={event.level}
-                    startDate={event.start_date}
-                    endDate={event.end_date}
+                    startDate={event.startDate}
+                    endDate={event.endDate}
                     logo={event.logo}
                     image={event.image}
-                    details={event.tournament_details[0]}
+                    details={event.details}
                   />
                 ))}
               </div>

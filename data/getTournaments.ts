@@ -1,7 +1,9 @@
-import { supabase } from '@/lib/supabase';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
+import { mapTournamentFromDatabase } from '@/services/tournaments.mapper';
+import { TournamentEvent } from '@/types/tournament';
 
-export async function getTournaments() {
-  const { data, error } = await supabase
+export async function getTournaments(): Promise<TournamentEvent[]> {
+  const { data, error } = await getSupabaseAdmin
     .from('tournaments')
     .select(
       `
@@ -23,9 +25,11 @@ export async function getTournaments() {
     .order('start_date', { ascending: true });
 
   if (error) {
-    console.error(error);
+    console.error('GET TOURNAMENTS ERROR:', error);
     return [];
   }
 
-  return data;
+  if (!data) return [];
+
+  return data.map(mapTournamentFromDatabase);
 }
