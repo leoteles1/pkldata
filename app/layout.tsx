@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="bg-gray-100">
+    <html lang="pt-BR" className="bg-white">
       <head>
         <meta name="color-scheme" content="light" />
       </head>
@@ -33,7 +33,7 @@ export default function RootLayout({
           ${geistSans.variable}
           ${geistMono.variable}
           antialiased
-          bg-gray-100
+          bg-white
           text-gray-900
         `}
       >
