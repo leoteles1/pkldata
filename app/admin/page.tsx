@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getTournaments } from '@/data/getTournaments';
 import AdminClient from './AdminClient';
 
