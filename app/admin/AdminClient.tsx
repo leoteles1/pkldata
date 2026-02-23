@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { TournamentEvent } from '@/types/tournament';
 
 type Tournament = {
   id: string;
@@ -13,7 +14,7 @@ type Tournament = {
 export default function AdminClient({
   tournaments,
 }: {
-  tournaments: Tournament[];
+  tournaments: TournamentEvent[];
 }) {
   const [list, setList] = useState(tournaments);
   const [showForm, setShowForm] = useState(false);
@@ -198,7 +199,7 @@ export default function AdminClient({
           <div key={t.id} className="border p-3 rounded">
             <strong>{t.title}</strong>
             <div>
-              {t.start_date} → {t.end_date}
+              {t.startDate} → {t.endDate}
             </div>
             <div>Pontuação: {t.level}</div>
           </div>
