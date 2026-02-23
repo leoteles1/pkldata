@@ -24,7 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="bg-gray-100">
+      <head>
+        <meta name="color-scheme" content="light" />
+      </head>
       <body
         className={`
           ${geistSans.variable}
