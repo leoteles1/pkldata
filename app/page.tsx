@@ -13,17 +13,21 @@ export default async function Home() {
     <>
       <Header />
 
-      <main className="max-w-3xl mx-auto px-4 space-y-6">
-        <h2 className="flex justify-center items-center text-xl font-semibold pt-0 py-6">
-          O CALENDÁRIO 2026 DO PICKLEBALL BRASILEIRO
-        </h2>
+      <main className="max-w-5xl mx-auto px-6 space-y-12 min-h-screen bg-neutral-200">
+        <div className="text-center pt-0 pb-10 space-y-2">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            O Calendário do Pickleball Brasileiro
+          </h1>
+
+          <p className="text-gray-600 text-lg">Torneios oficiais 2026</p>
+        </div>
 
         <div className="space-y-8">
           {groupedByMonth &&
             Object.entries(groupedByMonth).map(([month, events]) => (
               <div key={month} className="space-y-4">
-                <h3 className="text-lg font-extrabold tracking-wide">
-                  . {month.toUpperCase()}
+                <h3 className="text-2xl font-bold tracking-wide inline-block pb-1">
+                  {month.toUpperCase()}
                 </h3>
 
                 {(events as any[]).map((event) => (

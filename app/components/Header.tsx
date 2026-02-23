@@ -8,7 +8,7 @@ export default function Header() {
         <Image
           src="/pkldattao.png"
           alt="PKDATA Logo"
-          width={600}
+          width={400}
           height={80}
           priority
           className="cursor-pointer"
