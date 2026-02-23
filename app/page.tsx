@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Header from './components/Header';
 import TournamentCard from './components/TournamentCard';
 import { getTournaments } from '@/data/getTournaments';
