@@ -72,13 +72,15 @@ export default function TournamentCard({
         </div>
 
         {/* PONTUAÇÃO */}
-        <span
-          className={`text-xs font-bold px-3 py-1 rounded-full ${
-            levelColors[level]
-          }`}
-        >
-          PKB {level}
-        </span>
+        {level && (
+          <span
+            className={`text-xs font-bold px-3 py-1 rounded-full ${
+              levelColors[level]
+            }`}
+          >
+            PKB {level}
+          </span>
+        )}
       </div>
 
       {/* MODAL */}
@@ -100,13 +102,15 @@ export default function TournamentCard({
               </div>
 
               {/* PONTUAÇÃO */}
-              <span
-                className={`text-xs text-white px-3 py-1 rounded-full ${
-                  levelColors[level]
-                }`}
-              >
-                PKB {level}
-              </span>
+              {level && (
+                <span
+                  className={`text-xs text-white px-3 py-1 rounded-full ${
+                    levelColors[level]
+                  }`}
+                >
+                  PKB {level}
+                </span>
+              )}
             </div>
 
             {/* LINHA */}
