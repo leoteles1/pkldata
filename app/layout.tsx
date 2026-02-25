@@ -13,9 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PKBrasil 2026 | Calendário Oficial de Torneios',
+  title: 'PKLDATA BRASIL',
   description:
     'Calendário oficial de torneios de Pickleball chancelados pela Confederação Brasileira e federações filiadas.',
+  other: {
+    'color-scheme': 'light',
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="bg-white">
+    <html lang="pt-BR" className="light">
       <head>
         <meta name="color-scheme" content="light" />
       </head>
