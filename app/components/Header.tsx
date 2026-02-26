@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="flex justify-center items-center py-10">
+    <header className="flex justify-center bg-black items-center py-8">
       <Link href="/">
         <Image
           src="/logo-pkldata.png"
