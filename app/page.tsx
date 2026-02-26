@@ -14,8 +14,8 @@ export default async function Home() {
       <Header />
 
       <main className="max-w-5xl mx-auto px-6 space-y-12 min-h-screen">
-        <div className="text-center pt-0 pb-10 space-y-2">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <div className="text-center pt-0 pb-4 space-y-2">
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900">
             O Calendário do Pickleball Brasileiro
           </h1>
 

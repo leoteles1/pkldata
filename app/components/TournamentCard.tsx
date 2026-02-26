@@ -137,7 +137,19 @@ export default function TournamentCard({
                 <strong>Categorias:</strong> {details.categorias}
               </p>
               <p>
-                <strong>Inscrições:</strong> {details.inscricoes}
+                <strong>Inscrições:</strong>{' '}
+                {details.inscricoes?.startsWith('http') ? (
+                  <a
+                    href={details.inscricoes}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-2 inline-block bg-gray-900 text-white px-3 py-1 rounded-lg text-xs"
+                  >
+                    Fazer inscrição
+                  </a>
+                ) : (
+                  details.inscricoes
+                )}
               </p>
             </div>
 
