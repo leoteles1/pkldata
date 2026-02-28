@@ -4,6 +4,7 @@ import Header from './components/Header';
 import TournamentCard from './components/TournamentCard';
 import { getTournaments } from '@/data/getTournaments';
 import { groupTournamentsByMonth } from '@/services/tournaments.service';
+import SponsorsCarousel from './components/SponsorsCarousel';
 
 export default async function Home() {
   const tournaments = await getTournaments();
@@ -12,11 +13,14 @@ export default async function Home() {
   return (
     <>
       <Header />
+      <SponsorsCarousel />
 
       <main className="max-w-5xl mx-auto px-6 space-y-12 min-h-screen">
-        <div className="text-center pt-0 pb-4 space-y-2">
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 pt-10">
-            O Calendário do Pickleball Brasileiro
+        <div className="text-center pt-10 pb-0 space-y-2">
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 drop-shadow-sm">
+            O Calendário do{' '}
+            <span className="text-gray-500 drop-shadow-sm">Pickleball</span>{' '}
+            Brasileiro
           </h1>
 
           <p className="text-gray-600 text-lg">Torneios oficiais 2026</p>

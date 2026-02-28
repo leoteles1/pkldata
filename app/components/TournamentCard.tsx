@@ -49,7 +49,7 @@ export default function TournamentCard({
       {/* CARD */}
       <div
         onClick={() => setOpen(true)}
-        className="cursor-pointer border rounded-xl p-4 bg-white flex items-center gap-4 hover:shadow-md transition"
+        className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 px-6 py-5 flex items-center gap-3 justify-between"
       >
         {/* DATA */}
         <div className="flex flex-col items-center justify-center text-center">
