@@ -31,7 +31,7 @@ export default function SponsorsCarousel() {
   }, []);
 
   return (
-    <div className="overflow-hidden pt-4 pb-0 bg-white">
+    <div className=" mx-auto max-w-7xl w-full overflow-hidden pt-4 pb-0 bg-white">
       <div
         ref={scrollRef}
         className="flex gap-10 whitespace-nowrap overflow-hidden"
