@@ -7,7 +7,6 @@ export async function POST(req: Request) {
 
     const { title, level, startDate, endDate, logo, image, details } = body;
 
-    // 1️⃣ cria o torneio
     const { data: tournament, error: tournamentError } = await getSupabaseAdmin
       .from('tournaments')
       .insert([
@@ -31,7 +30,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2️⃣ cria os detalhes (tabela separada)
     const { error: detailsError } = await getSupabaseAdmin
       .from('tournament_details')
       .insert([
@@ -52,7 +50,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3️⃣ retorna o torneio criado
     return NextResponse.json(tournament);
   } catch (err) {
     console.error('ERRO GERAL:', err);

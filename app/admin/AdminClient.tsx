@@ -24,7 +24,6 @@ export default function AdminClient({
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // detalhes
   const [local, setLocal] = useState('');
   const [formato, setFormato] = useState('');
   const [categorias, setCategorias] = useState('');

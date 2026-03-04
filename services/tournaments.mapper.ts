@@ -30,6 +30,6 @@ export function mapTournamentFromDatabase(
     logo: db.logo ?? '',
     image: db.image ?? null,
 
-    details: db.tournament_details[0], // 1:1 relationship
+    details: db.tournament_details[0],
   };
 }
