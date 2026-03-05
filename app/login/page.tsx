@@ -1,53 +1,103 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { LoaderIcon } from 'lucide-react';
+import { useForm } from "react-hook-form"
+import { loginSchema } from '@/lib/schemas/loginSchema';
+import { Iauth } from '@/interfaces/Iauth';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginAction } from '@/actions/auth.action';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  async function handleLogin() {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+  const { register, handleSubmit, formState: { errors } } = useForm<Iauth>({
+    resolver: zodResolver(loginSchema),
+  })
 
-    if (error) {
-      alert(error.message);
+  async function handleLogin(data: Iauth) {
+    setLoading(true);
+
+    const result = await loginAction(data);
+
+    if (!result.success) {
+      toast.error(result.error);
+      setLoading(false);
       return;
     }
 
-    window.location.href = '/admin';
+    setLoading(false);
+    toast.success(result.message);
+    router.push('/admin')
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-sm space-y-4">
-        <h1 className="text-xl font-bold">Login Admin</h1>
+    <div className="flex justify-center items-center h-screen">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Login administrador</CardTitle>
+          <CardDescription>
+            Insira seu email e senha para acessar
+          </CardDescription>
+        </CardHeader>
 
-        <input
-          className="w-full border px-3 py-2 rounded"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          className="w-full border px-3 py-2 rounded"
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button
-          onClick={handleLogin}
-          className="w-full bg-black text-white py-2 rounded"
-        >
-          Entrar
-        </button>
-      </div>
+        <CardContent>
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <div className="space-y-4">
+              <div>
+                <Label>Email</Label>
+                <Input
+                  type="email"
+                  className="mt-2"
+                  placeholder="Email"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
+              </div>
+              <div>
+                <Label>Senha</Label>
+                <Input
+                  type="password"
+                  placeholder="Senha"
+                  className="mt-2"
+                  {...register("password")}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm">{errors.password.message}</p>
+                )}
+              </div>
+            </div>
+            <CardFooter className="flex justify-center my-4 p-0">
+              <CardAction className="w-full">
+                <Button className="w-full cursor-pointer" type="submit" disabled={loading}>
+                  {loading ? (
+                    <LoaderIcon className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    'Entrar'
+                  )}
+                </Button>
+              </CardAction>
+            </CardFooter>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

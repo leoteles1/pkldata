@@ -1,10 +1,10 @@
 export const dynamic = 'force-dynamic';
 
-import Header from './components/Header';
-import TournamentCard from './components/TournamentCard';
+import Header from '../components/Header';
+import TournamentCard from '../components/TournamentCard';
 import { getTournaments } from '@/data/getTournaments';
 import { groupTournamentsByMonth } from '@/services/tournaments.service';
-import SponsorsCarousel from './components/SponsorsCarousel';
+import SponsorsCarousel from '../components/SponsorsCarousel';
 
 export default async function Home() {
   const tournaments = await getTournaments();
