@@ -43,8 +43,7 @@ export default function LoginPage() {
 
     setLoading(false);
     toast.success(result.message);
-    //setTimeout(() => router.push('/admin'), 1500);
-    window.location.href = '/admin';
+    router.push('/admin')
   }
 
   return (
