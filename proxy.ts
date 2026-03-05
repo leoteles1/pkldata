@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/auth-helpers-nextjs';
 import { NextResponse, type NextRequest } from 'next/server';
 
+
 export async function proxy(req: NextRequest) {
     let response = NextResponse.next({
         request: {
@@ -8,12 +9,9 @@ export async function proxy(req: NextRequest) {
         },
     });
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
     const supabase = createServerClient(
-        supabaseUrl,
-        supabaseKey,
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         {
             cookies: {
                 getAll() {
@@ -43,6 +41,7 @@ export async function proxy(req: NextRequest) {
     const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
     const isLoginRoute = req.nextUrl.pathname.startsWith('/login');
 
+
     if (isAdminRoute && !session) {
         const redirectUrl = req.nextUrl.clone();
         redirectUrl.pathname = '/login';
@@ -59,6 +58,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-    // Intercepta rotas /admin e a /login
     matcher: ['/admin/:path*', '/login'],
 };
