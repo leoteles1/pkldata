@@ -73,12 +73,12 @@ export default function TournamentCard({
 
         {/* PONTUAÇÃO */}
         {level && (
-          <span
-            className={`text-xs font-bold px-3 py-1 rounded-full ${
-              levelColors[level]
-            }`}
-          >
-            PKB {level}
+          <span className={`px-2 py-1`}>
+            <img
+              src={`/badges/pkb-${level}.png`}
+              alt={`PKB ${level}`}
+              className="h-6 w-auto"
+            />
           </span>
         )}
       </div>
