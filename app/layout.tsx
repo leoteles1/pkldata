@@ -15,9 +15,65 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PKLDATA BRASIL',
+  title: {
+    default: 'PKLDATA BRASIL – Calendário de Torneios de Pickleball',
+    template: '%s | PKLDATA BRASIL',
+  },
   description:
-    'Calendário oficial de torneios de Pickleball chancelados pela Confederação Brasileira e federações filiadas.',
+    'Calendário oficial de torneios de Pickleball no Brasil. Confira agenda, inscrições, resultados e campeonatos chancelados pela Confederação Brasileira e federações filiadas.',
+  keywords: [
+    'pickleball',
+    'pickleball brasil',
+    'torneio pickleball',
+    'torneios pickleball brasil',
+    'campeonato pickleball',
+    'calendário pickleball',
+    'agenda torneios pickleball',
+    'inscrição torneio pickleball',
+    'resultados pickleball',
+    'confederação brasileira de pickleball',
+    'quadra pickleball',
+    'jogar pickleball',
+    'eventos pickleball brasil',
+    'pickleball 2026',
+    'campeonato brasileiro pickleball',
+  ],
+  authors: [{ name: 'PKLDATA BRASIL' }],
+  creator: 'PKLDATA BRASIL',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    siteName: 'PKLDATA BRASIL',
+    title: 'PKLDATA BRASIL – Calendário de Torneios de Pickleball',
+    description:
+      'Confira o calendário completo de torneios de Pickleball no Brasil. Agenda, inscrições e resultados dos campeonatos oficiais.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PKLDATA BRASIL – Calendário de Torneios de Pickleball',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PKLDATA BRASIL – Torneios de Pickleball',
+    description:
+      'Calendário oficial de torneios de Pickleball no Brasil. Agenda, inscrições e resultados.',
+    images: ['/og-image.png'],
+  },
   other: {
     'color-scheme': 'light',
   },
