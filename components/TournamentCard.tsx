@@ -60,7 +60,7 @@ export default function TournamentCard({
         onClick={() => setOpen(true)}
         className="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer h-full border border-slate-100"
       >
-        <div className="relative h-32 sm:h-48 hidden md:block w-full bg-slate-100 overflow-hidden flex items-center justify-center">
+        <div className="relative h-12 sm:h-48  md:block w-full bg-slate-100 overflow-hidden flex items-center justify-center">
           {image ? (
             <Image
               src={image}
