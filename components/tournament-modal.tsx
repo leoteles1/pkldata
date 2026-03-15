@@ -216,7 +216,7 @@ export function TournamentModal({ open, onOpenChange, onSuccess }: TournamentMod
 
                             <Separator />
 
-                            {/* Imagens */}
+
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="space-y-2">
                                     <Label htmlFor="logo">Logo (opcional)</Label>
