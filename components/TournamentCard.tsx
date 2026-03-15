@@ -45,7 +45,6 @@ export default function TournamentCard({
       ? `${dayStart} a ${dayEnd} ${monthStart}`
       : `${dayStart} ${monthStart} a ${dayEnd} ${monthEnd}`;
 
-  // Default placeholder is handled safely inside the markup using Trophy
 
   const badgeVariant =
     level === 1000 ? '1000' :
@@ -60,50 +59,62 @@ export default function TournamentCard({
         onClick={() => setOpen(true)}
         className="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer h-full border border-slate-100"
       >
-        <div className="relative h-12 sm:h-48  md:block w-full bg-slate-100 overflow-hidden flex items-center justify-center">
-          {image ? (
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full bg-slate-800 flex items-center justify-center text-slate-500">
-              <Trophy className="w-12 h-12 sm:w-16 sm:h-16 opacity-30" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex justify-between items-end">
+        <div className="relative h-24 sm:h-48 md:block w-full bg-[#0B1221] overflow-hidden flex items-center justify-center">
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
             {logo && (
               <div className="bg-white p-1 rounded-md sm:rounded-lg">
                 <img src={logo} alt={title} className="w-6 h-6 sm:w-10 sm:h-10 object-contain" />
               </div>
             )}
-            {level && (
-              <Badge variant={badgeVariant as any} className="shadow-lg font-bold text-[10px] sm:text-xs">
-                {levelDisplay}
-              </Badge>
+          </div>
+
+          <div className="hidden sm:block w-full h-full relative">
+            {image ? (
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-slate-500">
+                <Trophy className="w-16 h-16 opacity-30" />
+              </div>
             )}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+          </div>
+          <div className="sm:hidden px-4 text-center">
+            <h4 className="text-sm font-bold text-white leading-tight line-clamp-2">
+              {title}
+            </h4>
           </div>
         </div>
 
-        <div className="p-3 sm:p-5 flex flex-col flex-1">
-          <h4 className="text-sm sm:text-lg font-bold text-slate-900 leading-tight mb-2 sm:mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">
+
+        <div className="p-4 sm:p-5 flex flex-col flex-1">
+
+          <h4 className="hidden sm:block text-lg font-bold text-slate-900 leading-tight mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">
             {title}
           </h4>
 
-          <div className="mt-auto space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-600">
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
-              <span className="truncate">{dateString}</span>
+          <div className="flex justify-between items-end gap-2 mt-auto">
+            <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-600">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
+                <span className="truncate">{dateString}</span>
+              </div>
+
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
+                <span className="truncate">{details.local}</span>
+              </div>
             </div>
 
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
-              <span className="truncate">{details.local}</span>
-            </div>
+            {level && (
+              <Badge variant={badgeVariant as any} className="shadow-lg font-bold text-[10px] sm:text-xs shrink-0">
+                {levelDisplay}
+              </Badge>
+            )}
           </div>
         </div>
       </div>
