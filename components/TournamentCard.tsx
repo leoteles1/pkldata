@@ -110,13 +110,16 @@ export default function TournamentCard({
               </div>
             </div>
 
-            {level && (
-              <Badge variant={badgeVariant as any} className="shadow-lg font-bold text-[10px] sm:text-xs shrink-0">
-                {levelDisplay}
-              </Badge>
-            )}
-          </div>
-        </div>
+        {/* PONTUAÇÃO */}
+        {level && (
+          <span className={`px-2 py-1`}>
+            <img
+              src={`/badges/pkb-${level}.png`}
+              alt={`PKB ${level}`}
+              className="h-6 w-auto"
+            />
+          </span>
+        )}
       </div>
 
       {open && (
