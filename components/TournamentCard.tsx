@@ -45,6 +45,9 @@ export default function TournamentCard({
   const dayEnd = String(end.getDate()).padStart(2, '0');
   const monthStart = start.toLocaleDateString('pt-BR', { month: 'short' });
   const monthEnd = end.toLocaleDateString('pt-BR', { month: 'short' });
+  
+  const monthStartBase = monthStart.replace('.', '').toUpperCase();
+  const monthLetters = monthStartBase.slice(0, 3).padEnd(3, ' ').split('');
 
   const dateString =
     start.getMonth() === end.getMonth()
@@ -63,69 +66,112 @@ export default function TournamentCard({
     <Dialog open={open} onOpenChange={setOpen}>
       <div
         onClick={() => setOpen(true)}
-        className="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer h-full border border-slate-100"
+        className="group bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer h-full border border-slate-100 flex flex-col"
       >
-        <div className="relative h-24 sm:h-48 md:block w-full bg-[#0B1221] overflow-hidden flex items-center justify-center">
-          <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
-            {logo && (
-              <div className="bg-white p-1 rounded-md sm:rounded-lg">
-                <img src={logo} alt={title} className="w-6 h-6 sm:w-10 sm:h-10 object-contain" />
+        {/* ======= MOBILE VIEW ======= */}
+        <div className="sm:hidden flex items-center justify-between w-full px-3 py-4 gap-2">
+          
+          <div className="flex items-center gap-3 shrink-0">
+            {/* DATE */}
+            <div className="flex items-center gap-1.5">
+              <div className="flex flex-col items-center justify-center text-[15px] font-black leading-none text-slate-800 tracking-wide">
+                <span>{monthLetters[0]}</span>
+                <span>{monthLetters[1]}</span>
+                <span>{monthLetters[2]}</span>
               </div>
-            )}
-          </div>
-
-          <div className="hidden sm:block w-full h-full relative">
-            {image ? (
-              <Image
-                src={image}
-                alt={title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-slate-500">
-                <Trophy className="w-16 h-16 opacity-30" />
-              </div>
-            )}
-            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-          </div>
-          <div className="sm:hidden px-4 text-center">
-            <h4 className="text-sm font-bold text-white leading-tight line-clamp-2">
-              {title}
-            </h4>
-          </div>
-        </div>
-
-
-        <div className="p-4 sm:p-5 flex flex-col flex-1">
-
-          <h4 className="hidden sm:block text-lg font-bold text-slate-900 leading-tight mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">
-            {title}
-          </h4>
-
-          <div className="flex justify-between items-end gap-2 mt-auto">
-            <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-600">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
-                <span className="truncate">{dateString}</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 shrink-0" />
-                <span className="truncate">{details.local}</span>
+              <div className="flex flex-col items-center justify-center text-[13px] font-semibold leading-[1.1] text-slate-600 gap-0.5">
+                <span>{dayStart}</span>
+                <span className="text-[10px] lowercase text-slate-400">a</span>
+                <span>{dayEnd}</span>
               </div>
             </div>
 
-            {/* PONTUAÇÃO */}
-            {level && (
-              <span className={`px-2 py-1`}>
-                <img
-                  src={`/badges/pkb-${level}.png`}
-                  alt={`PKB ${level}`}
-                  className="h-6 w-auto"
-                />
-              </span>
+            {/* FEDERATION LOGO */}
+            {logo && (
+              <div className="w-11 h-11 flex items-center justify-center shrink-0">
+                <img src={logo} alt="Logo" className="max-w-full max-h-full object-contain" />
+              </div>
             )}
+          </div>
+
+          {/* VERTICAL DIVIDER */}
+          <div className="w-px h-10 bg-slate-300 mx-1 shrink-0"></div>
+
+          {/* TITLE */}
+          <div className="flex-1 flex items-center min-w-0 pr-1">
+            <h4 className="text-[1.35rem] font-black uppercase text-slate-900 leading-none line-clamp-2">
+              {title}
+            </h4>
+          </div>
+
+          {/* BADGE */}
+          {level && (
+            <div className="shrink-0 p-1 border border-slate-200 rounded-xl flex items-center justify-center w-11 h-11">
+              <img
+                src={`/badges/pkb-${level}.png`}
+                alt={`PKB ${level}`}
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* ======= DESKTOP VIEW ======= */}
+        <div className="hidden sm:flex flex-col w-full h-full">
+          <div className="relative h-48 w-full bg-[#0B1221] overflow-hidden flex items-center justify-center shrink-0">
+            <div className="absolute top-4 left-4 z-10">
+              {logo && (
+                <div className="bg-white p-1 rounded-lg">
+                  <img src={logo} alt={title} className="w-10 h-10 object-contain" />
+                </div>
+              )}
+            </div>
+
+            <div className="w-full h-full relative">
+              {image ? (
+                <Image
+                  src={image}
+                  alt={title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-slate-500">
+                  <Trophy className="w-16 h-16 opacity-30" />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+            </div>
+          </div>
+
+          <div className="p-5 flex flex-col flex-1">
+            <h4 className="text-lg font-bold text-slate-900 leading-tight mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">
+              {title}
+            </h4>
+
+            <div className="flex justify-between items-end gap-2 mt-auto">
+              <div className="space-y-2 text-sm text-slate-600">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span className="truncate">{dateString}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span className="truncate">{details.local}</span>
+                </div>
+              </div>
+
+              {level && (
+                <span className="px-2 py-1">
+                  <img
+                    src={`/badges/pkb-${level}.png`}
+                    alt={`PKB ${level}`}
+                    className="h-6 w-auto"
+                  />
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
