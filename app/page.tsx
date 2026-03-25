@@ -45,6 +45,23 @@ export default async function Home({ searchParams }: {
     (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
   );
 
+  const groupedTournaments: { month: string; events: typeof tournaments }[] = [];
+
+  filteredTournaments.forEach((event) => {
+    // Para garantir que eventos do dia 1 nao recuem pro mes anterior por causa de fuso:
+    // Pegando do componente da data (UTC se a data for yyyy-mm-dd puro)
+    const eventDate = new Date(event.startDate);
+    const monthStr = eventDate.toLocaleDateString('pt-BR', { month: 'long', timeZone: 'UTC' });
+    const capitalizedMonth = monthStr.charAt(0).toUpperCase() + monthStr.slice(1);
+
+    const lastGroup = groupedTournaments[groupedTournaments.length - 1];
+    if (lastGroup && lastGroup.month === capitalizedMonth) {
+      lastGroup.events.push(event);
+    } else {
+      groupedTournaments.push({ month: capitalizedMonth, events: [event] });
+    }
+  });
+
   return (
     <>
       <Header />
@@ -69,18 +86,31 @@ export default async function Home({ searchParams }: {
               <p className="text-lg">Nenhum torneio encontrado para o período selecionado.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {filteredTournaments.map((event) => (
-                <TournamentCard
-                  key={event.id}
-                  title={event.title}
-                  level={event.level}
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  logo={event.logo}
-                  image={event.image}
-                  details={event.details}
-                />
+            <div className="space-y-12">
+              {groupedTournaments.map((group) => (
+                <div key={group.month} className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
+                      {group.month}
+                    </h2>
+                    <div className="h-px bg-slate-200 flex-1"></div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    {group.events.map((event) => (
+                      <TournamentCard
+                        key={event.id}
+                        title={event.title}
+                        level={event.level}
+                        startDate={event.startDate}
+                        endDate={event.endDate}
+                        logo={event.logo}
+                        image={event.image}
+                        details={event.details}
+                      />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           )}
