@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { TournamentLevel } from '@/types/tournament';
 import { Calendar, MapPin, X, Trophy } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -45,7 +44,7 @@ export default function TournamentCard({
   const dayEnd = String(end.getDate()).padStart(2, '0');
   const monthStart = start.toLocaleDateString('pt-BR', { month: 'short' });
   const monthEnd = end.toLocaleDateString('pt-BR', { month: 'short' });
-  
+
   const monthStartBase = monthStart.replace('.', '').toUpperCase();
   const monthLetters = monthStartBase.slice(0, 3).padEnd(3, ' ').split('');
 
@@ -70,7 +69,7 @@ export default function TournamentCard({
       >
         {/* ======= MOBILE VIEW ======= */}
         <div className="sm:hidden flex items-center justify-between w-full px-3 py-4 gap-2">
-          
+
           <div className="flex items-center gap-3 shrink-0">
             {/* DATE */}
             <div className="flex items-center gap-1.5">
@@ -176,12 +175,20 @@ export default function TournamentCard({
         </div>
       </div>
 
-      <DialogContent className="max-w-lg p-0 overflow-hidden rounded-3xl border-none shadow-2xl bg-white">
+      <DialogContent className="max-w-md w-screen sm:w-[500px] p-0 overflow-hidden rounded-t-3xl sm:rounded-3xl border-none shadow-2xl bg-white flex flex-col mt-auto h-[90vh] sm:h-[70vh] sm:mt-0">
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full text-white transition-colors"
+        >
+          <X className="w-5 h-5" />
+          <span className="sr-only">Close</span>
+        </button>
 
-        <div className="relative h-64 sm:h-72 w-full shrink-0 bg-slate-900 overflow-hidden">
+        {/* Banner Area */}
+        <div className="relative h-64 sm:h-[45%] w-full shrink-0 bg-slate-100 flex items-center justify-center">
           {image ? (
             <Image
               src={image}
@@ -190,104 +197,91 @@ export default function TournamentCard({
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-slate-800">
-              <Trophy className="w-20 h-20 text-slate-700 opacity-60" />
+            <div className="text-4xl font-black text-slate-300 tracking-widest uppercase">
+              Imagem
             </div>
           )}
-          {/* Overlay Gradiente */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-
-          <div className="absolute bottom-6 left-6 right-6 flex items-center gap-3">
-            {logo && (
-              <div className="bg-white p-1 rounded-lg shrink-0">
-                <img src={logo} alt={title} className="w-10 h-10 object-contain" />
-              </div>
-            )}
-            <h2 className="text-2xl font-bold text-white leading-tight drop-shadow-md">{title}</h2>
-          </div>
         </div>
 
-        {/* Conteúdo do Modal */}
-        <div className="p-6 md:p-8 overflow-y-auto bg-white max-h-[50vh]">
-          <div className="space-y-6">
-            {/* Data */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
-                <Calendar className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <p className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Data do Evento</p>
-                <p className="text-slate-900 font-bold text-lg">{dateString}</p>
-              </div>
-            </div>
-
-            {/* Localização */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
-                <MapPin className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <p className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Localização</p>
-                <p className="text-slate-900 font-bold text-lg">{details.local}</p>
-              </div>
-            </div>
-
-            {/* PKB */}
-            {level && (
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
-                  <Trophy className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Pontuação PKB</p>
-                  <Badge variant={badgeVariant as any} className="shadow-lg font-bold mt-1">
-                    {levelDisplay}
-                  </Badge>
-                </div>
-              </div>
+        {/* Info Bar */}
+        <div className="px-6 py-5 flex items-center justify-between border-b border-slate-100 shrink-0 bg-white">
+          {/* Logo */}
+          <div className="shrink-0 w-16 h-16 p-1.5 rounded-xl border border-slate-200 flex items-center justify-center bg-white shadow-sm">
+            {logo ? (
+              <img src={logo} alt="Logo" className="max-w-full max-h-full object-contain" />
+            ) : (
+              <Trophy className="w-6 h-6 text-slate-300" />
             )}
+          </div>
 
-            {/* Link do Torneio */}
-            <div className="pt-4 border-t border-slate-100">
-              {details.inscricoes?.startsWith('http') ? (
-                <div className="flex items-center gap-2 text-green-600 group/link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                  <a
-                    href={details.inscricoes}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium hover:underline truncate"
-                  >
-                    {new URL(details.inscricoes).hostname}
-                  </a>
+          {/* Title */}
+          <div className="flex-1 px-4 text-center">
+            <h2 className="text-[1.35rem] sm:text-2xl font-black text-slate-800 leading-tight uppercase line-clamp-2">
+              {title}
+            </h2>
+          </div>
+
+          {level ? (
+            <img
+              src={`/badges/pkb-${level}.png`}
+              alt={`PKB ${level}`}
+              className="max-w-full max-h-full object-contain"
+            />
+
+          ) : (
+            <span className="text-xs font-bold text-slate-400">Reg</span>
+          )}
+
+        </div>
+
+        <div className="p-4 md:p-8 bg-white flex-1 relative border-b border-slate-100">
+          <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="flex flex-col items-start gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-12 rounded-lg border border-green-100 flex items-center justify-center shrink-0">
+                  <Calendar className="w-6 h-6 text-green-500" />
                 </div>
-              ) : null}
+                <span className="text-[14px] sm:text-[18px] font-bold text-slate-800">
+                  {dateString}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-12 rounded-lg border border-green-100 flex items-center justify-center shrink-0">
+                  <MapPin className="w-6 h-6 text-green-500" />
+                </div>
+                <span className="text-[14px] sm:text-[18px] font-bold text-slate-800">
+                  {details.local}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="p-6 md:p-8 bg-white shrink-0">
+        <div className="p-4 md:p-8 pt-2 bg-white shrink-0 mt-auto">
           {details.inscricoes?.startsWith('http') ? (
             <Button
               asChild
-              className="w-full h-14 text-lg font-bold bg-green-500 hover:bg-green-600 text-white rounded-2xl shadow-lg shadow-green-200"
+              variant="outline"
+              className="w-full h-14 text-xl font-bold uppercase bg-green-500 text-white  border-2 border-slate-200 hover:bg-green-600 hover:text-white flex items-center justify-center rounded-xl"
             >
               <a href={details.inscricoes} target="_blank" rel="noopener noreferrer">
-                <span className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
-                  Fazer inscrição
-                </span>
+                Inscrição
               </a>
             </Button>
           ) : (
             <Button
               disabled
-              className="w-full h-14 text-lg font-bold rounded-2xl"
+              variant="outline"
+              className="w-full h-14 text-xl font-black uppercase text-slate-400 border-2 border-slate-100 rounded-xl bg-white"
             >
-              Inscrições em breve
+              Em breve
             </Button>
           )}
         </div>
+
       </DialogContent>
     </Dialog>
   );
