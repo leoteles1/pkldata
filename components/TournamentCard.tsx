@@ -98,20 +98,19 @@ export default function TournamentCard({
 
           {/* TITLE */}
           <div className="flex-1 flex items-center min-w-0 pr-1">
-            <h4 className="text-[1.35rem] font-black uppercase text-slate-900 leading-none line-clamp-2">
+            <h4 className="text-[1.00rem] font-black uppercase text-slate-900 leading-none line-clamp-2">
               {title}
             </h4>
           </div>
 
           {/* BADGE */}
           {level && (
-            <div className="shrink-0 p-1 border border-slate-200 rounded-xl flex items-center justify-center w-11 h-11">
-              <img
-                src={`/badges/pkb-${level}.png`}
-                alt={`PKB ${level}`}
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
+
+            <img
+              src={`/badges/pkb-${level}.png`}
+              alt={`PKB ${level}`}
+              className="max-w-full max-h-full object-contain"
+            />
           )}
         </div>
 
@@ -175,7 +174,7 @@ export default function TournamentCard({
         </div>
       </div>
 
-      <DialogContent className="max-w-md w-screen sm:w-[500px] p-0 overflow-hidden rounded-t-3xl sm:rounded-3xl border-none shadow-2xl bg-white flex flex-col mt-auto h-[90vh] sm:h-[70vh] sm:mt-0">
+      <DialogContent className="max-w-md w-screen sm:w-[500px] p-0 overflow-hidden rounded-t-3xl sm:rounded-3xl border-none shadow-2xl bg-white flex flex-col mt-auto h-[90vh] sm:h-auto sm:max-h-[90vh] sm:mt-0">
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
@@ -188,7 +187,7 @@ export default function TournamentCard({
         </button>
 
         {/* Banner Area */}
-        <div className="relative h-64 sm:h-[45%] w-full shrink-0 bg-slate-100 flex items-center justify-center">
+        <div className="relative h-64 sm:h-72 w-full shrink-0 bg-slate-100 flex items-center justify-center">
           {image ? (
             <Image
               src={image}
@@ -234,7 +233,7 @@ export default function TournamentCard({
 
         </div>
 
-        <div className="p-4 md:p-8 bg-white flex-1 relative border-b border-slate-100">
+        <div className="p-4 md:p-8 md:pb-6 bg-white flex-1 relative border-b border-slate-100">
           <div className="grid grid-cols-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-2">
               <div className="flex items-center gap-2">
@@ -260,7 +259,7 @@ export default function TournamentCard({
           </div>
         </div>
 
-        <div className="p-4 md:p-8 pt-2 bg-white shrink-0 mt-auto">
+        <div className="p-4 md:p-8 md:pt-4 pt-2 bg-white shrink-0 mt-auto">
           {details.inscricoes?.startsWith('http') ? (
             <Button
               asChild
