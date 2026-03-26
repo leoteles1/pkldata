@@ -174,7 +174,7 @@ export default function TournamentCard({
         </div>
       </div>
 
-      <DialogContent className="max-w-md w-screen sm:w-[500px] p-0 overflow-hidden rounded-t-3xl sm:rounded-3xl border-none shadow-2xl bg-white flex flex-col mt-auto h-[90vh] sm:h-auto sm:max-h-[90vh] sm:mt-0">
+      <DialogContent className="max-w-md w-screen sm:w-[500px] p-0 overflow-hidden rounded-t-3xl sm:rounded-3xl border-none shadow-2xl bg-white flex flex-col mt-auto md:max-h-[90vh] sm:mt-0">
         <DialogHeader className="sr-only">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
