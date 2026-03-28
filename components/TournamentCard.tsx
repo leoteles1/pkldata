@@ -45,8 +45,6 @@ export default function TournamentCard({
   const monthStart = start.toLocaleDateString('pt-BR', { month: 'short' });
   const monthEnd = end.toLocaleDateString('pt-BR', { month: 'short' });
 
-  const monthStartBase = monthStart.replace('.', '').toUpperCase();
-  const monthLetters = monthStartBase.slice(0, 3).padEnd(3, ' ').split('');
 
   const dateString =
     start.getMonth() === end.getMonth()
@@ -73,11 +71,6 @@ export default function TournamentCard({
           <div className="flex items-center gap-3 shrink-0">
             {/* DATE */}
             <div className="flex items-center gap-1.5">
-              <div className="flex flex-col items-center justify-center text-[15px] font-black leading-none text-slate-800 tracking-wide">
-                <span>{monthLetters[0]}</span>
-                <span>{monthLetters[1]}</span>
-                <span>{monthLetters[2]}</span>
-              </div>
               <div className="flex flex-col items-center justify-center text-[13px] font-semibold leading-[1.1] text-slate-600 gap-0.5">
                 <span>{dayStart}</span>
                 <span className="text-[10px] lowercase text-slate-400">a</span>
@@ -105,7 +98,6 @@ export default function TournamentCard({
 
           {/* BADGE */}
           {level && (
-
             <img
               src={`/badges/pkb-${level}.png`}
               alt={`PKB ${level}`}
@@ -237,10 +229,10 @@ export default function TournamentCard({
           <div className="grid grid-cols-2 gap-4 w-full">
             <div className="flex flex-col items-start gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-12 h-12 rounded-lg border border-green-100 flex items-center justify-center shrink-0">
-                  <Calendar className="w-6 h-6 text-green-500" />
+                <div className="w-12 h-12 rounded-lg border border-[#2b3c57] flex items-center justify-center shrink-0">
+                  <Calendar className="w-6 h-6 text-[#1e2939]" />
                 </div>
-                <span className="text-[14px] sm:text-[18px] font-bold text-slate-800">
+                <span className="text-[14px] sm:text-[18px] font-bold text-[#1e2939]">
                   {dateString}
                 </span>
               </div>
@@ -248,8 +240,8 @@ export default function TournamentCard({
 
             <div className="flex flex-col items-start gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-12 h-12 rounded-lg border border-green-100 flex items-center justify-center shrink-0">
-                  <MapPin className="w-6 h-6 text-green-500" />
+                <div className="w-12 h-12 rounded-lg border border-[#2b3c57] flex items-center justify-center shrink-0">
+                  <MapPin className="w-6 h-6 text-[#1e2939]" />
                 </div>
                 <span className="text-[14px] sm:text-[18px] font-bold text-slate-800">
                   {details.local}
@@ -264,7 +256,7 @@ export default function TournamentCard({
             <Button
               asChild
               variant="outline"
-              className="w-full h-14 text-xl font-bold uppercase bg-green-500 text-white  border-2 border-slate-200 hover:bg-green-600 hover:text-white flex items-center justify-center rounded-xl"
+              className="w-full h-14 text-xl font-bold uppercase bg-[#1e2939] text-white  border-2 border-[#1e2939] hover:bg-[#1e2939] hover:text-white flex items-center justify-center rounded-xl"
             >
               <a href={details.inscricoes} target="_blank" rel="noopener noreferrer">
                 Inscrição
