@@ -19,9 +19,9 @@ const badgeVariants = cva(
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         1000: "bg-red-600 text-white hover:bg-red-700",
-        750: "bg-blue-600 text-white hover:bg-blue-700",
-        500: "bg-orange-500 text-white hover:bg-orange-600",
-        regional: "bg-green-600 text-white hover:bg-green-700",
+        750: "bg-yellow-500 text-slate-900 hover:bg-yellow-600",
+        500: "bg-green-600 text-white hover:bg-green-700",
+        regional: "bg-slate-500 text-white hover:bg-slate-600",
       },
     },
     defaultVariants: {

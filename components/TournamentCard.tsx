@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
 
 interface TournamentCardProps {
   title: string;
@@ -98,11 +99,9 @@ export default function TournamentCard({
 
           {/* BADGE */}
           {level && (
-            <img
-              src={`/badges/pkb-${level}.png`}
-              alt={`PKB ${level}`}
-              className="max-w-full max-h-full object-contain"
-            />
+            <Badge variant={badgeVariant as any} className="text-xs shrink-0 whitespace-nowrap">
+              {levelDisplay}
+            </Badge>
           )}
         </div>
 
@@ -153,13 +152,9 @@ export default function TournamentCard({
               </div>
 
               {level && (
-                <span className="px-2 py-1">
-                  <img
-                    src={`/badges/pkb-${level}.png`}
-                    alt={`PKB ${level}`}
-                    className="h-6 w-auto"
-                  />
-                </span>
+                <Badge variant={badgeVariant as any} className="text-sm">
+                  {levelDisplay}
+                </Badge>
               )}
             </div>
           </div>
@@ -213,12 +208,9 @@ export default function TournamentCard({
           </div>
 
           {level ? (
-            <img
-              src={`/badges/pkb-${level}.png`}
-              alt={`PKB ${level}`}
-              className="max-w-full max-h-full object-contain"
-            />
-
+            <Badge variant={badgeVariant as any} className="text-sm px-3 py-1">
+              {levelDisplay}
+            </Badge>
           ) : (
             <span className="text-xs font-bold text-slate-400">Reg</span>
           )}
